@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anshuman Yashodhar Rangaraj</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1A1612;
+      --paper: #F6F1EB;
+      --paper-warm: #EDE6DC;
+      --cream: #FAF7F2;
+      --rust: #B44D2D;
+      --rust-light: #D4724E;
+      --rust-bg: rgba(180,77,45,0.06);
+      --teal: #2D7B6F;
+      --teal-light: #3A9E8F;
+      --slate: #5C5752;
+      --muted: #8A847D;
+      --border: #D6CFC5;
+      --border-light: #E8E2DA;
+      --shadow: rgba(26,22,18,0.08);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--rust); color: var(--paper); }
+
+    /* GRAIN OVERLAY */
+    body::after {
+      content: '';
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0.9rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(246,241,235,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-light);
+    }
+    .nav-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--ink);
+      letter-spacing: 0.3px;
+    }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-link {
+      color: var(--slate); cursor: pointer;
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 1.2px; text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative; user-select: none;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 1.5px; background: var(--rust);
+      transition: width 0.3s;
+    }
+    .nav-link:hover { color: var(--rust); }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 7rem 3rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -20%; right: -10%;
+      width: 60vw; height: 60vw;
+      background: radial-gradient(ellipse, rgba(180,77,45,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-tag::before {
+      content: ''; width: 32px; height: 1.5px; background: var(--rust);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.12; font-weight: 800;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.9s ease both;
+    }
+    .hero h1 em {
+      font-style: italic; font-weight: 600;
+      color: var(--rust);
+    }
+    .hero-desc {
+      font-size: 1.1rem; color: var(--slate); max-width: 520px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.9s ease 0.15s both;
+    }
+    .hero-links {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fadeUp 0.9s ease 0.3s both;
+    }
+    .hero-links a {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.65rem 1.4rem; border-radius: 6px;
+      font-size: 0.85rem; font-weight: 600;
+      text-decoration: none; transition: all 0.3s;
+      letter-spacing: 0.3px;
+    }
+    .btn-primary {
+      background: var(--rust); color: var(--paper);
+      border: 1.5px solid var(--rust);
+    }
+    .btn-primary:hover { background: var(--rust-light); border-color: var(--rust-light); }
+    .btn-outline {
+      background: transparent; color: var(--ink);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--rust); color: var(--rust); }
+
+    .hero-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 30px var(--shadow);
+      animation: fadeUp 0.9s ease 0.2s both;
+    }
+    .hero-card .card-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.25rem;
+    }
+    .info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.9rem;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { color: var(--muted); font-weight: 500; }
+    .info-value { font-weight: 600; color: var(--ink); text-align: right; }
+    .info-value a { color: var(--teal); text-decoration: none; }
+    .info-value a:hover { text-decoration: underline; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── SECTION SYSTEM ─── */
+    section { padding: 5rem 3rem; max-width: 1100px; margin: 0 auto; }
+
+    .sec-divider {
+      max-width: 1100px; margin: 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, var(--border) 20%, var(--border) 80%, transparent 100%);
+    }
+
+    .sec-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .sec-label::before {
+      content: ''; width: 20px; height: 1.5px; background: var(--rust);
+    }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700; margin-bottom: 0.6rem;
+    }
+    .sec-sub {
+      color: var(--slate); font-size: 1.02rem; max-width: 640px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+    .edu-card {
+      background: var(--cream); border: 1px solid var(--border-light);
+      border-radius: 12px; padding: 1.75rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .edu-card:hover {
+      border-color: var(--rust-light);
+      box-shadow: 0 4px 16px var(--shadow);
+    }
+    .edu-degree {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem;
+    }
+    .edu-school { color: var(--teal); font-weight: 600; font-size: 0.9rem; }
+    .edu-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; color: var(--muted); margin-top: 0.5rem;
+      letter-spacing: 0.5px;
+    }
+    .edu-gpa {
+      display: inline-block; margin-top: 0.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; padding: 0.2rem 0.6rem;
+      background: var(--rust-bg); color: var(--rust);
+      border-radius: 4px; font-weight: 600;
+    }
+    .edu-focus { color: var(--slate); font-size: 0.85rem; margin-top: 0.4rem; }
+
+    /* ─── EXPERIENCE TIMELINE ─── */
+    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .exp-item {
+      display: grid; grid-template-columns: 180px 1fr; gap: 2rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem; color: var(--muted);
+      letter-spacing: 0.5px; padding-top: 0.3rem;
+    }
+    .exp-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700; margin-bottom: 0.15rem;
+    }
+    .exp-org { color: var(--teal); font-weight: 600; font-size: 0.92rem; margin-bottom: 0.6rem; }
+    .exp-desc { color: var(--slate); font-size: 0.88rem; }
+    .exp-desc li { margin-bottom: 0.3rem; }
+
+    /* ─── PUBLICATIONS ─── */
+    .pub-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .pub-item {
+      background: var(--cream); border: 1px solid var(--border-light);
+      border-radius: 12px; padding: 1.5rem 1.75rem;
+      display: grid; grid-template-columns: 40px 1fr; gap: 1.25rem;
+      align-items: start;
+      transition: border-color 0.3s;
+    }
+    .pub-item:hover { border-color: var(--teal-light); }
+    .pub-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 800; color: var(--border);
+      line-height: 1;
+    }
+    .pub-type {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 0.3rem;
+    }
+    .pub-title {
+      font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem;
+    }
+    .pub-meta { color: var(--muted); font-size: 0.82rem; }
+    .pub-link {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      color: var(--teal); font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; margin-top: 0.4rem;
+    }
+    .pub-link:hover { text-decoration: underline; }
+    .pub-link svg { width: 14px; height: 14px; }
+
+    /* ─── PROJECTS GRID ─── */
+    .proj-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+    .proj-card {
+      background: var(--cream); border: 1px solid var(--border-light);
+      border-radius: 12px; padding: 1.75rem;
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .proj-card:hover {
+      border-color: var(--rust-light);
+      box-shadow: 0 6px 24px var(--shadow);
+      transform: translateY(-3px);
+    }
+    .proj-card .proj-icon {
+      font-size: 1.5rem; margin-bottom: 1rem;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--rust-bg); border-radius: 10px;
+    }
+    .proj-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .proj-card p { color: var(--slate); font-size: 0.85rem; }
+    .proj-tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem;
+    }
+    .proj-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.5px;
+      padding: 0.2rem 0.55rem; border-radius: 4px;
+      background: rgba(45,123,111,0.08); color: var(--teal);
+      border: 1px solid rgba(45,123,111,0.15);
+    }
+    .proj-card a.proj-ext {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      color: var(--rust); font-size: 0.82rem; font-weight: 600;
+      text-decoration: none; margin-top: 0.75rem;
+    }
+    .proj-card a.proj-ext:hover { text-decoration: underline; }
+
+    /* ─── SKILLS ─── */
+    .skills-section {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .skill-group {
+      background: var(--cream); border: 1px solid var(--border-light);
+      border-radius: 12px; padding: 1.5rem 1.75rem;
+    }
+    .skill-group-title {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--rust); margin-bottom: 0.75rem; font-weight: 600;
+    }
+    .skill-group .tags {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .skill-group .tag {
+      font-size: 0.8rem; padding: 0.3rem 0.7rem;
+      background: var(--paper); border: 1px solid var(--border);
+      border-radius: 6px; color: var(--ink); font-weight: 500;
+      transition: all 0.2s;
+    }
+    .skill-group .tag:hover {
+      background: var(--rust-bg); border-color: var(--rust-light); color: var(--rust);
+    }
+
+    /* ─── AWARDS ─── */
+    .awards-list { display: flex; flex-direction: column; gap: 1rem; }
+    .award-item {
+      display: grid; grid-template-columns: 48px 1fr; gap: 1rem;
+      align-items: start; padding: 1rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .award-item:last-child { border-bottom: none; }
+    .award-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      background: var(--rust-bg);
+    }
+    .award-item h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .award-item p { color: var(--slate); font-size: 0.82rem; }
+    .award-item .award-year {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; color: var(--muted); margin-top: 0.2rem;
+    }
+    .award-item a { color: var(--teal); font-size: 0.8rem; text-decoration: none; }
+    .award-item a:hover { text-decoration: underline; }
+
+    /* ─── HOBBIES ─── */
+    .hobbies-row {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+    }
+    .hobby-chip {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.75rem 1.4rem;
+      background: var(--cream); border: 1px solid var(--border-light);
+      border-radius: 999px; font-size: 0.88rem; font-weight: 500;
+      transition: all 0.3s;
+    }
+    .hobby-chip:hover {
+      background: var(--rust-bg); border-color: var(--rust-light);
+      transform: translateY(-2px);
+    }
+    .hobby-chip span.h-icon { font-size: 1.15rem; }
+
+    /* ─── TEACHING ─── */
+    .teaching-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .teach-card {
+      background: var(--cream); border: 1px solid var(--border-light);
+      border-radius: 10px; padding: 1.25rem 1.5rem;
+    }
+    .teach-card .teach-course { font-weight: 700; font-size: 0.92rem; margin-bottom: 0.15rem; }
+    .teach-card .teach-term { 
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; color: var(--muted); letter-spacing: 0.5px;
+    }
+
+    /* ─── FOOTER ─── */
+
+    /* ─── HCI DEEP DIVE ─── */
+    .hci-timeline {
+      position: relative; padding-left: 2.5rem; margin-bottom: 2rem;
+    }
+    .hci-timeline::before {
+      content: ''; position: absolute; left: 0.55rem; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--rust), var(--teal), var(--border));
+    }
+    .hci-phase {
+      position: relative; margin-bottom: 2rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--cream); border: 1px solid var(--border-light);
+      border-radius: 10px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .hci-phase:hover { border-color: var(--rust-light); transform: translateX(3px); }
+    .hci-phase::before {
+      content: ''; position: absolute; left: -2.25rem; top: 1.5rem;
+      width: 10px; height: 10px;
+      background: var(--rust); border-radius: 50%;
+      border: 2.5px solid var(--paper);
+    }
+    .hci-phase-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--rust-light); margin-bottom: 0.3rem;
+    }
+    .hci-phase h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 0.35rem;
+    }
+    .hci-phase p { color: var(--slate); font-size: 0.85rem; }
+    .hci-methods { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+
+    /* Thematic Table */
+    .themes-table {
+      width: 100%; border-collapse: collapse; font-size: 0.85rem;
+    }
+    .themes-table th {
+      text-align: left; padding: 0.75rem 1rem;
+      background: var(--paper-warm);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--rust); border-bottom: 2px solid var(--border);
+    }
+    .themes-table td {
+      padding: 0.7rem 1rem; border-bottom: 1px solid var(--border-light);
+      color: var(--slate); vertical-align: top;
+    }
+    .themes-table tr:hover td { background: var(--rust-bg); }
+    .theme-header {
+      font-weight: 700 !important; font-size: 0.8rem !important;
+      padding-top: 1.2rem !important;
+      border-bottom: 1px solid var(--border) !important;
+    }
+    .bar-track { height: 5px; background: var(--border-light); border-radius: 3px; margin-top: 3px; }
+    .bar-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--rust), var(--teal));
+    }
+    .quote { font-style: italic; color: var(--ink); font-size: 0.8rem; }
+
+    /* Heuristic Grid */
+    .heur-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .heur-card {
+      background: var(--cream); border: 1px solid var(--border-light);
+      border-radius: 10px; padding: 1.25rem 1.5rem;
+    }
+    .heur-name { font-weight: 700; font-size: 0.92rem; margin-bottom: 0.2rem; }
+    .heur-sev {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; margin-bottom: 0.5rem; font-weight: 600;
+    }
+    .sev-1 { color: var(--teal); }
+    .sev-2 { color: var(--rust-light); }
+    .sev-3 { color: var(--rust); }
+    .sev-4 { color: #C62828; }
+    .heur-card p { color: var(--slate); font-size: 0.82rem; }
+
+    @media (max-width: 768px) {
+      .hci-timeline { padding-left: 2rem; }
+      #hci-deep-dive .proj-grid { grid-template-columns: 1fr; }
+      #hci-deep-dive [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center; padding: 3.5rem 2rem 2.5rem;
+      border-top: 1px solid var(--border);
+      max-width: 1100px; margin: 0 auto;
+    }
+    footer .foot-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem;
+    }
+    footer .foot-links {
+      display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    footer .foot-links a {
+      color: var(--teal); text-decoration: none; font-size: 0.88rem; font-weight: 600;
+    }
+    footer .foot-links a:hover { text-decoration: underline; }
+    footer .foot-copy { color: var(--muted); font-size: 0.78rem; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      nav { padding: 0.8rem 1.25rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.7rem; letter-spacing: 0.8px; }
+      .hero { padding: 6rem 1.5rem 3rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      section { padding: 3rem 1.5rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .proj-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.4rem; }
+    }
+
+    /* Scroll-triggered fade */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Anshuman Y. Rangaraj</div>
+  <div class="nav-links">
+    <span class="nav-link" data-target="education">Education</span>
+    <span class="nav-link" data-target="experience">Experience</span>
+    <span class="nav-link" data-target="research">Research</span>
+    <span class="nav-link" data-target="projects">Projects</span>
+    <span class="nav-link" data-target="hci-deep-dive">Case Study</span>
+    <span class="nav-link" data-target="skills">Skills</span>
+    <span class="nav-link" data-target="contact">Contact</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-tag">PhD Candidate &middot; HCI Researcher</div>
+      <h1>Anshuman <em>Yashodhar</em> Rangaraj</h1>
+      <p class="hero-desc">PhD candidate specializing in Generative &amp; Agentic AI literacy, responsible AI design, and human–AI collaboration. Combining deep technical expertise with rigorous mixed-methods research to build transparent, user-centered AI systems.</p>
+      <div class="hero-links">
+        <a href="https://www.linkedin.com/in/anshuman-yashodhar-rangaraj/" target="_blank" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://orcid.org/0009-0008-9526-4135" target="_blank" class="btn-outline">ORCID Profile</a>
+        <a href="/cdn-cgi/l/email-protection#35545b465d4058545b47545b525447545f755258545c591b565a58" class="btn-outline">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">At a Glance</div>
+      <div class="info-row"><span class="info-label">Location</span><span class="info-value">Cincinnati, OH</span></div>
+      <div class="info-row"><span class="info-label">Program</span><span class="info-value">PhD Information Technology</span></div>
+      <div class="info-row"><span class="info-label">GPA</span><span class="info-value">4.0 / 4.0</span></div>
+      <div class="info-row"><span class="info-label">Focus Areas</span><span class="info-value">HCI, Gen-AI Literacy, Responsible AI</span></div>
+      <div class="info-row"><span class="info-label">Teaching</span><span class="info-value">6 courses as TA + Adjunct</span></div>
+      <div class="info-row"><span class="info-label">Publications</span><span class="info-value">1 published, 2 in prep</span></div>
+      <div class="info-row"><span class="info-label">Industry</span><span class="info-value">4+ years</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- EDUCATION -->
+<section id="education" class="reveal">
+  <div class="sec-label">Education</div>
+  <div class="sec-title">Academic Background</div>
+  <div class="sec-sub">Four degrees spanning computer science, geospatial technology, and information technology.</div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-degree">PhD in Information Technology</div>
+      <div class="edu-school">University of Cincinnati, OH</div>
+      <div class="edu-date">Aug 2024 – Present</div>
+      <span class="edu-gpa">GPA 4.0</span>
+      <div class="edu-focus">Focus: HCI, Generative &amp; Agentic AI Literacy, Responsible AI Design</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">M.S. in Information Technology</div>
+      <div class="edu-school">University of Cincinnati, OH</div>
+      <div class="edu-date">Aug 2022 – Dec 2023</div>
+      <span class="edu-gpa">GPA 4.0</span>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">M.Eng. in Remote Sensing &amp; GIS</div>
+      <div class="edu-school">Asian Institute of Technology, Thailand</div>
+      <div class="edu-date">Jan 2017 – May 2019</div>
+      <span class="edu-gpa">GPA 3.28</span>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">B.Tech. in Computer Science &amp; Engineering</div>
+      <div class="edu-school">JNTU Hyderabad, India</div>
+      <div class="edu-date">Sep 2013 – Dec 2016</div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="reveal">
+  <div class="sec-label">Experience</div>
+  <div class="sec-title">Professional &amp; Research</div>
+  <div class="sec-sub">From IoT prototyping and data curation to teaching and HCI research.</div>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-date">Aug 2025 – Present</div>
+      <div>
+        <div class="exp-role">Teaching Assistant Coordinator</div>
+        <div class="exp-org">University of Cincinnati</div>
+        <div class="exp-desc">Lead IT Learning Center operations, supervising and mentoring TAs. Design training workshops, analyze program data for forecasting, and develop instructional materials to strengthen IT course delivery.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">May – Aug 2025</div>
+      <div>
+        <div class="exp-role">Adjunct Professor</div>
+        <div class="exp-org">University of Cincinnati</div>
+        <div class="exp-desc">Designed and delivered IT courses aligned with Quality Matters standards. Created multimedia content and hands-on assessments. Collaborated with Course Success Team on evidence-based pedagogical improvements.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Feb 2024 – Present</div>
+      <div>
+        <div class="exp-role">Research Associate</div>
+        <div class="exp-org">Smart Synergies LAB / Civic Tech LAB, UC</div>
+        <div class="exp-desc">Develop interactive data visualizations for BATMAP, a public-facing ecological dashboard tracking bat populations and habitat patterns. Refactor codebase for improved load times and rendering efficiency.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Nov 2024 – Present</div>
+      <div>
+        <div class="exp-role">Research Assistant</div>
+        <div class="exp-org">University of Cincinnati</div>
+        <div class="exp-desc">Engineer geolocation pipelines for disaster survey responses. Conduct systematic analysis of 50+ papers on social media geolocation methodologies. Design visualizations for crisis response applications.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Sep 2020 – Jun 2022</div>
+      <div>
+        <div class="exp-role">Data Curation &amp; Analysis Specialist</div>
+        <div class="exp-org">Gameopedia</div>
+        <div class="exp-desc">Built a Python-based recommendation system for gaming e-commerce. Led a cross-functional pod of 8+ members managing sprints and task allocation. Developed dashboards in Excel and Google Data Studio.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jan – Sep 2020</div>
+      <div>
+        <div class="exp-role">Co-Founder &amp; Project Lead</div>
+        <div class="exp-org">EcoAction</div>
+        <div class="exp-desc">Co-founded an environmental solutions platform that ranked #4 of 1,000+ teams at the World Innovation Day Hackathon (Oracle, UNESCO, UNEP). Led product design, hiring, and Agile/Scrum ceremonies.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Sep – Dec 2019</div>
+      <div>
+        <div class="exp-role">Solutions Engineer Intern</div>
+        <div class="exp-org">TIBCO Software</div>
+        <div class="exp-desc">Prototyped an IoT and deep learning-based gunshot detection system using MFCC audio features and Raspberry Pi. Researched smart city solutions through need-finding and requirements engineering.</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">May – Jul 2016</div>
+      <div>
+        <div class="exp-role">Research Intern</div>
+        <div class="exp-org">Indian Institute of Technology Hyderabad</div>
+        <div class="exp-desc">Built citation prediction models using machine learning. Designed web crawlers for academic repositories and improved search engine relevance through query expansion and clustering techniques.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- TEACHING -->
+<section class="reveal">
+  <div class="sec-label">Teaching</div>
+  <div class="sec-title">Courses Taught &amp; Assisted</div>
+  <div class="sec-sub">Graduate Teaching Assistant across 6 courses spanning capstone, HCI, data, and programming.</div>
+  <div class="teaching-grid">
+    <div class="teach-card">
+      <div class="teach-course">Capstone</div>
+      <div class="teach-term">Fall 2024 &amp; Spring 2025</div>
+    </div>
+    <div class="teach-card">
+      <div class="teach-course">Implications of IT</div>
+      <div class="teach-term">Spring 2025</div>
+    </div>
+    <div class="teach-card">
+      <div class="teach-course">Human–Computer Interaction</div>
+      <div class="teach-term">Summer &amp; Fall 2025</div>
+    </div>
+    <div class="teach-card">
+      <div class="teach-course">Data Tech Administration</div>
+      <div class="teach-term">Fall 2025</div>
+    </div>
+    <div class="teach-card">
+      <div class="teach-course">Data Tech Essentials</div>
+      <div class="teach-term">Spring 2026</div>
+    </div>
+    <div class="teach-card">
+      <div class="teach-course">Advanced Python Programming</div>
+      <div class="teach-term">Spring 2026</div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- PUBLICATIONS & RESEARCH -->
+<section id="research" class="reveal">
+  <div class="sec-label">Publications &amp; Research</div>
+  <div class="sec-title">Scholarly Work</div>
+  <div class="sec-sub">Peer-reviewed publications, manuscripts in preparation, posters, and a master's thesis.</div>
+
+  <div class="pub-list">
+    <div class="pub-item">
+      <div class="pub-num">1</div>
+      <div>
+        <div class="pub-type">Peer-Reviewed &middot; Published</div>
+        <div class="pub-title">Systematic Literature Review of the Development of Data Science Applications in Healthcare</div>
+        <div class="pub-meta">Rangaraj, A.Y., Langdon, T.P., and Said, H. (2025). <em>Issues in Informing Science and Information Technology.</em></div>
+        <a class="pub-link" href="https://doi.org/10.28945/5503" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          DOI: 10.28945/5503
+        </a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">2</div>
+      <div>
+        <div class="pub-type">Manuscript in Preparation</div>
+        <div class="pub-title">Gen-AI Literacy and the Need for Evaluating It: A Systematic Literature Review</div>
+        <div class="pub-meta">Rangaraj, A.Y. (2026). Drafted; submission pending.</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">3</div>
+      <div>
+        <div class="pub-type">Manuscript in Preparation</div>
+        <div class="pub-title">Geolocating Social Media for Crisis Management: A Systematic Review of Geolocation Goals, Data Sources, and Spatial Resolutions</div>
+        <div class="pub-meta">Grace, R. and Rangaraj, A.Y. (in preparation).</div>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">4</div>
+      <div>
+        <div class="pub-type">Poster Presentation</div>
+        <div class="pub-title">From Museum to Zoo: Adapting an AI Literacy Framework for Informal Learning in a Novel Context</div>
+        <div class="pub-meta">IT EXPO, University of Cincinnati, 2025.</div>
+        <a class="pub-link" href="https://itexpo.live/2025/research/81" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View on IT EXPO
+        </a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-num">5</div>
+      <div>
+        <div class="pub-type">Poster &middot; M.Eng. Thesis</div>
+        <div class="pub-title">Detection of On-Street Parked Vehicles Using Deep Learning and SIFT Extraction</div>
+        <div class="pub-meta">Academic Symposium &amp; Thesis, Asian Institute of Technology, Thailand, 2019.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects" class="reveal">
+  <div class="sec-label">Projects</div>
+  <div class="sec-title">Selected Work</div>
+  <div class="sec-sub">Hands-on projects across HCI, machine learning, GIS, IoT, and web development.</div>
+
+  <div class="proj-grid">
+
+    <div class="proj-card">
+      <div class="proj-icon">🎮</div>
+      <h3>AI or Animal? — Interactive Zoo Exhibit</h3>
+      <p>Gamified web-based exhibit for teaching Generative AI literacy in zoo settings. Users distinguish real vs. AI-generated animal images with real-time feedback, fun facts, and prompt transparency. Evaluated with 9-user think-aloud study and heuristic evaluation.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">HCI</span>
+        <span class="proj-tag">Gen-AI Literacy</span>
+        <span class="proj-tag">Usability</span>
+        <span class="proj-tag">Gamification</span>
+      </div>
+      <p style="margin-top:0.75rem; font-size:0.82rem; color:var(--rust); font-weight:600;">↓ Full case study below in "Featured Case Study" section</p>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">🦇</div>
+      <h3>BATMAP — Ecological Dashboard</h3>
+      <p>Public-facing interactive data visualization platform tracking bat populations and habitat patterns. Built for the Smart Synergies LAB / Civic Tech LAB at UC. Optimized codebase for performance and rendering efficiency.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">Data Viz</span>
+        <span class="proj-tag">Ecology</span>
+        <span class="proj-tag">JavaScript</span>
+        <span class="proj-tag">Civic Tech</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">📍</div>
+      <h3>Geolocation Pipeline for Disaster Response</h3>
+      <p>Engineered geocoding pipelines to transform disaster survey responses into spatial data for emergency management analysis. Synthesized 50+ papers on social media geolocation methodologies.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">GIS</span>
+        <span class="proj-tag">Crisis Response</span>
+        <span class="proj-tag">NLP</span>
+        <span class="proj-tag">Python</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">🌍</div>
+      <h3>EcoAction — Environmental Solutions Portal</h3>
+      <p>Co-founded platform for environmental knowledge sharing. Ranked #4 of 1,000+ teams at World Innovation Day Hackathon (Oracle, UNESCO, UNEP). Led product design, hiring, and Agile team management.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">Startup</span>
+        <span class="proj-tag">Agile/Scrum</span>
+        <span class="proj-tag">Product Design</span>
+      </div>
+      <a class="proj-ext" href="https://badges.parchment.au/public/assertions/CZAsZMgmSsmbVlHJ2GEddg?identity__email=brolyray.anshu%40gmail.com" target="_blank">
+        View Badge →
+      </a>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">🛡️</div>
+      <h3>Guardian — IoT Safety App</h3>
+      <p>Women's safety and accident response app using IoT sensors. Finalist — top 4 of 1,500 teams at Smart Cities Hackathon (Oracle, NSW Government, Slack). Data collected globally feeds city security planning.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">IoT</span>
+        <span class="proj-tag">Smart Cities</span>
+        <span class="proj-tag">Hackathon</span>
+      </div>
+      <a class="proj-ext" href="https://youtu.be/J2XcjlXAwf0" target="_blank">
+        Watch Demo →
+      </a>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">🔫</div>
+      <h3>IoT Gunshot Detection System</h3>
+      <p>Deep learning-based gunshot detection using MFCC audio features and Raspberry Pi sensor arrays. Built at TIBCO Software, earning hackathon recognition and a pre-sales presentation.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">Deep Learning</span>
+        <span class="proj-tag">IoT</span>
+        <span class="proj-tag">Audio/MFCC</span>
+        <span class="proj-tag">Raspberry Pi</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">🚗</div>
+      <h3>On-Street Parked Vehicle Detection</h3>
+      <p>M.Eng. thesis: deep learning and SIFT feature extraction for detecting parked vehicles in street-level imagery. Presented at Asian Institute of Technology academic symposium.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">Computer Vision</span>
+        <span class="proj-tag">Deep Learning</span>
+        <span class="proj-tag">SIFT</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">📚</div>
+      <h3>Indoor Library Navigation System</h3>
+      <p>Deep learning-based image recognition for indoor shelf mapping and book retrieval. Integrated with SQL-backed spatial data for location queries within the library.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">Image Recognition</span>
+        <span class="proj-tag">Indoor Mapping</span>
+        <span class="proj-tag">SQL</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">🤖</div>
+      <h3>Robotic Path Planning</h3>
+      <p>Collision-free navigation using Rapidly exploring Random Trees (RRT) algorithm in Python. B.Tech. major project at JNTU Hyderabad.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">Robotics</span>
+        <span class="proj-tag">RRT Algorithm</span>
+        <span class="proj-tag">Python</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">🏞️</div>
+      <h3>Flood-Risk-Free Site Selection</h3>
+      <p>GIS-based spatial analysis using ArcMap to identify suitable resort locations in flood-prone zones. Used elevation, hydrology, and land-use spatial data layers.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">GIS</span>
+        <span class="proj-tag">ArcMap</span>
+        <span class="proj-tag">Spatial Analysis</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">📊</div>
+      <h3>Future Citation Prediction</h3>
+      <p>Machine learning models to predict future citation counts of academic publications based on historical patterns. Built during research internship at IIT Hyderabad.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">Machine Learning</span>
+        <span class="proj-tag">Web Crawling</span>
+        <span class="proj-tag">Bibliometrics</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">🎯</div>
+      <h3>Gaming Recommendation System</h3>
+      <p>Python-based recommendation engine for e-commerce gaming platforms at Gameopedia. Improved content discovery and user engagement through collaborative filtering.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">RecSys</span>
+        <span class="proj-tag">Python</span>
+        <span class="proj-tag">E-Commerce</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">📋</div>
+      <h3>Canvas LMS Usability Evaluation</h3>
+      <p>SWOT analysis of Canvas LMS using Don Norman's design framework and Nielsen's heuristics. Evaluated calendar, mobile app, notification, and peer interaction features over a 3-day diary study.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">UX Evaluation</span>
+        <span class="proj-tag">SWOT</span>
+        <span class="proj-tag">Diary Study</span>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-icon">🏢</div>
+      <h3>ATM &amp; Post Office Management System</h3>
+      <p>Software engineering case studies with full SRS documentation, risk analysis, and testing. Architecture: Object-Oriented Analysis Design using UML-Rational Rose.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">Software Engineering</span>
+        <span class="proj-tag">UML</span>
+        <span class="proj-tag">OOAD</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- HCI DEEP DIVE -->
+<section id="hci-deep-dive" class="reveal">
+  <div class="sec-label">Featured Case Study</div>
+  <div class="sec-title">AI or Animal? — Full HCI Deep Dive</div>
+  <div class="sec-sub">From Museum to Zoo: Adapting a Generative AI Literacy Framework for Informal Learning in a Novel Context. A complete end-to-end user-centered design project.</div>
+
+  <!-- Problem & Solution -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:3rem;">
+    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:12px; padding:1.75rem; position:relative;">
+      <div style="font-family:'Playfair Display',serif; font-size:2.5rem; color:var(--border); position:absolute; top:0.75rem; right:1.25rem; opacity:0.4;">?</div>
+      <h4 style="font-weight:700; margin-bottom:0.4rem; color:var(--rust);">The Problem</h4>
+      <p style="color:var(--slate); font-size:0.88rem;">People see Generative AI as a bane rather than a boon, and learning from a classroom setting is not accessible to everyone. Parents often misinform children about both animals and AI technologies. While museum-based AI exhibits exist, zoological parks remain an untapped space for informal AI literacy.</p>
+    </div>
+    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:12px; padding:1.75rem; position:relative;">
+      <div style="font-family:'Playfair Display',serif; font-size:2.5rem; color:var(--border); position:absolute; top:0.75rem; right:1.25rem; opacity:0.4;">!</div>
+      <h4 style="font-weight:700; margin-bottom:0.4rem; color:var(--teal);">The Solution</h4>
+      <p style="color:var(--slate); font-size:0.88rem;">A gamified, web-based interactive kiosk called "AI or Animal?" that challenges visitors to distinguish between real and AI-generated animal content, teaching Generative AI literacy and animal knowledge simultaneously through play, surprise, and immediate feedback.</p>
+    </div>
+  </div>
+
+  <!-- Research Questions -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:3rem;">
+    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:12px; padding:1.5rem;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--teal); margin-bottom:0.4rem;">Research Question 1</div>
+      <p style="font-size:0.92rem; font-weight:600;">How can design elements of Generative AI exhibits affect visitors' understanding of AI concepts?</p>
+    </div>
+    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:12px; padding:1.5rem;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:var(--rust); margin-bottom:0.4rem;">Research Question 2</div>
+      <p style="font-size:0.92rem; font-weight:600;">What mental models do visitors construct when interacting with Generative AI exhibits in zoo settings?</p>
+    </div>
+  </div>
+
+  <!-- Design Process Timeline -->
+  <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:1.5rem;">Design Process</h3>
+
+  <div class="hci-timeline">
+    <div class="hci-phase">
+      <div class="hci-phase-tag">Phase 1 · Discovery</div>
+      <h4>Needfinding &amp; Literature Review</h4>
+      <p>Identified the gap in informal AI learning at zoological parks through literature review of Long et al. (2021), Clay et al. (2011), and Webber (2015). Conducted preliminary needfinding to understand zoo visitor behaviors and information needs.</p>
+      <div class="hci-methods">
+        <span class="proj-tag">Literature Review</span>
+        <span class="proj-tag">Needfinding</span>
+        <span class="proj-tag">Gap Analysis</span>
+      </div>
+    </div>
+    <div class="hci-phase">
+      <div class="hci-phase-tag">Phase 2 · Define</div>
+      <h4>Scenario-Based System Design</h4>
+      <p>Developed detailed use cases and interaction scenarios: identifying AI-generated content (primary task) and learning quizzes (secondary task). Mapped actors, system requirements, preconditions, and postconditions for the kiosk experience.</p>
+      <div class="hci-methods">
+        <span class="proj-tag">Use Case Modeling</span>
+        <span class="proj-tag">Scenario Design</span>
+        <span class="proj-tag">User Journey Mapping</span>
+      </div>
+    </div>
+    <div class="hci-phase">
+      <div class="hci-phase-tag">Phase 3 · Build</div>
+      <h4>Rapid Prototyping</h4>
+      <p>Built a functional web-based prototype using Claude AI as a development assistant. The game presents animal images and challenges users to identify whether they are real or AI-generated, with immediate feedback including fun facts, detection clues, and a progress bar.</p>
+      <div class="hci-methods">
+        <span class="proj-tag">Web Prototyping</span>
+        <span class="proj-tag">HTML/CSS/JS</span>
+        <span class="proj-tag">Gamification Design</span>
+      </div>
+    </div>
+    <div class="hci-phase">
+      <div class="hci-phase-tag">Phase 4 · Evaluate</div>
+      <h4>Think-Aloud Usability Testing</h4>
+      <p>Conducted think-aloud sessions with 9 participants (ages 6–35) across diverse technical backgrounds: children, artists, professors, data scientists, and general users. Used both concurrent and retrospective protocols via in-person, WhatsApp, and Discord.</p>
+      <div class="hci-methods">
+        <span class="proj-tag">Think-Aloud Protocol</span>
+        <span class="proj-tag">Pilot Testing</span>
+        <span class="proj-tag">Qualitative Analysis</span>
+      </div>
+    </div>
+    <div class="hci-phase">
+      <div class="hci-phase-tag">Phase 5 · Analyze</div>
+      <h4>Thematic Analysis</h4>
+      <p>Analyzed think-aloud transcripts identifying 3 major themes and 13 sub-themes. Top sub-themes by participant count: Learning Value (8/9), Feedback Appropriateness (6/9), and Engagement Features (5/9).</p>
+      <div class="hci-methods">
+        <span class="proj-tag">Thematic Analysis</span>
+        <span class="proj-tag">Transcript Coding</span>
+        <span class="proj-tag">Data Saturation</span>
+      </div>
+    </div>
+    <div class="hci-phase">
+      <div class="hci-phase-tag">Phase 6 · Iterate</div>
+      <h4>Heuristic Evaluation &amp; Redesign</h4>
+      <p>Applied Nielsen's 10 Usability Heuristics with a co-evaluator. Identified the most critical violation: missing Help &amp; Documentation (severity 4). Iterated on the design based on all findings.</p>
+      <div class="hci-methods">
+        <span class="proj-tag">Nielsen's Heuristics</span>
+        <span class="proj-tag">Severity Rating</span>
+        <span class="proj-tag">Design Iteration</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- THEMATIC ANALYSIS TABLE -->
+  <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; margin:3rem 0 0.5rem;">Thematic Analysis Results</h3>
+  <p style="color:var(--slate); font-size:0.92rem; margin-bottom:1.5rem;">3 major themes and 13 sub-themes from 9 think-aloud sessions.</p>
+
+  <div style="overflow-x:auto;">
+    <table class="themes-table">
+      <thead>
+        <tr>
+          <th>Theme / Sub-theme</th>
+          <th>Participants</th>
+          <th style="min-width:130px;">Coverage</th>
+          <th>Representative Quote</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="4" class="theme-header" style="color:var(--rust);">Theme 1: Perceived Usefulness</td></tr>
+        <tr>
+          <td><strong>Learning Value</strong></td>
+          <td>8 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:89%"></div></div></td>
+          <td class="quote">"I have never thought about how AI creates animals — this taught me something new"</td>
+        </tr>
+        <tr>
+          <td><strong>Educational Fit</strong></td>
+          <td>4 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:44%"></div></div></td>
+          <td class="quote">"I could use this as a warmup in my school science class"</td>
+        </tr>
+        <tr>
+          <td><strong>Prompt Transparency</strong></td>
+          <td>3 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:33%"></div></div></td>
+          <td class="quote">"It would help to know what kind of prompt generated this image"</td>
+        </tr>
+        <tr>
+          <td><strong>Animal Knowledge Gained</strong></td>
+          <td>4 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:44%"></div></div></td>
+          <td class="quote">"That's an interesting fact — giraffes sleep for just 30 minutes a day"</td>
+        </tr>
+
+        <tr><td colspan="4" class="theme-header" style="color:var(--teal);">Theme 2: Usability</td></tr>
+        <tr>
+          <td><strong>Interface Clarity</strong></td>
+          <td>5 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:56%"></div></div></td>
+          <td class="quote">"Pretty straightforward to explore"</td>
+        </tr>
+        <tr>
+          <td><strong>Feedback Appropriateness</strong></td>
+          <td>6 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:67%"></div></div></td>
+          <td class="quote">"Even if I'm wrong, I'd still like a fun fact — that way I still learn"</td>
+        </tr>
+        <tr>
+          <td><strong>Game Progress &amp; Flow</strong></td>
+          <td>3 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:33%"></div></div></td>
+          <td class="quote">"The flow from one round to another is really smooth and intuitive"</td>
+        </tr>
+        <tr>
+          <td><strong>Accessibility Needs</strong></td>
+          <td>2 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:22%"></div></div></td>
+          <td class="quote">"A voice assistant or text-to-speech would be helpful for seniors"</td>
+        </tr>
+
+        <tr><td colspan="4" class="theme-header" style="color:var(--rust-light);">Theme 3: UI/UX &amp; Engagement</td></tr>
+        <tr>
+          <td><strong>Visual Appeal</strong></td>
+          <td>3 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:33%"></div></div></td>
+          <td class="quote">"The interface is clean and fun to look at"</td>
+        </tr>
+        <tr>
+          <td><strong>Engagement Features</strong></td>
+          <td>5 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:56%"></div></div></td>
+          <td class="quote">"Add badges or a leaderboard — it will feel more like a real game"</td>
+        </tr>
+        <tr>
+          <td><strong>Challenge Level</strong></td>
+          <td>4 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:44%"></div></div></td>
+          <td class="quote">"This image is too perfect — it gives away that it's AI. I want a harder one"</td>
+        </tr>
+        <tr>
+          <td><strong>Dataset Variety</strong></td>
+          <td>2 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:22%"></div></div></td>
+          <td class="quote">"Try adding paintings or mutated animals — that would be more thought provoking"</td>
+        </tr>
+        <tr>
+          <td><strong>Audio Absence</strong></td>
+          <td>2 / 9</td>
+          <td><div class="bar-track"><div class="bar-fill" style="width:22%"></div></div></td>
+          <td class="quote">"I clicked on audio but nothing worked — is it still in progress?"</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- HEURISTIC EVALUATION -->
+  <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; margin:3rem 0 0.5rem;">Heuristic Evaluation</h3>
+  <p style="color:var(--slate); font-size:0.92rem; margin-bottom:1.5rem;">Nielsen's 10 Heuristics applied across both tasks. Severity: 0 (no issue) → 4 (catastrophe).</p>
+
+  <div class="heur-grid">
+    <div class="heur-card">
+      <div class="heur-name">Help &amp; Documentation</div>
+      <div class="heur-sev sev-4">Severity 4 — Catastrophe</div>
+      <p>No help or support link. Users encountering terms like "prompt" or "artifact" have no way to access explanations.</p>
+    </div>
+    <div class="heur-card">
+      <div class="heur-name">User Control &amp; Freedom</div>
+      <div class="heur-sev sev-2">Severity 2 — Minor</div>
+      <p>Users must intentionally fail to see wrong-answer educational content; no way to explore all feedback paths voluntarily.</p>
+    </div>
+    <div class="heur-card">
+      <div class="heur-name">Recognition &gt; Recall</div>
+      <div class="heur-sev sev-2">Severity 2 — Minor</div>
+      <p>AI recognition strategies are static rather than tied to specific images. Dynamic, contextual clues would improve learning.</p>
+    </div>
+    <div class="heur-card">
+      <div class="heur-name">Visibility of System Status</div>
+      <div class="heur-sev sev-1">Severity 1 — Cosmetic</div>
+      <p>Progress bar glitches and image loading delays can inadvertently reveal whether content is AI-generated.</p>
+    </div>
+  </div>
+
+  <!-- DESIGN ITERATIONS -->
+  <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; margin:3rem 0 0.5rem;">Design Iterations</h3>
+  <p style="color:var(--slate); font-size:0.92rem; margin-bottom:1.5rem;">Key changes implemented based on user feedback and heuristic violations.</p>
+
+  <div class="proj-grid">
+    <div class="proj-card">
+      <div class="proj-icon">🔍</div>
+      <h3>Prompt Transparency</h3>
+      <p>Added the AI prompt used to generate each image, enabling users to reverse-engineer AI behavior and develop meta-level reasoning.</p>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">🎯</div>
+      <h3>Detection Clues</h3>
+      <p>Added "how to spot" visual clues on every screen — even for wrong answers — so learning happens regardless of accuracy.</p>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">🖼️</div>
+      <h3>Gray-Area Images</h3>
+      <p>Expanded dataset with paintings, mutated animals, and ultra-realistic AI images to increase challenge and provoke deeper critical thinking.</p>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">📱</div>
+      <h3>Fit-to-Screen Layout</h3>
+      <p>Eliminated scrolling by fitting quiz content to a single viewport, addressing mobile and kiosk usability complaints.</p>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">🔊</div>
+      <h3>Audio Removed (Temp)</h3>
+      <p>Non-functional audio challenge removed to reduce confusion; moved to future work with proper implementation plan.</p>
+    </div>
+    <div class="proj-card">
+      <div class="proj-icon">🦒</div>
+      <h3>Expanded Animal Set</h3>
+      <p>Added more animals and non-repeating fun facts so returning users encounter fresh content on replays.</p>
+    </div>
+  </div>
+
+  <!-- KEY FINDINGS -->
+  <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; margin:3rem 0 0.5rem;">Key Findings</h3>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:12px; padding:1.75rem;">
+      <h4 style="font-weight:700; margin-bottom:0.5rem; color:var(--teal);">RQ1: Design &amp; Understanding</h4>
+      <p style="color:var(--slate); font-size:0.88rem;">Well-designed interaction mechanisms and immediate, contextual feedback significantly shaped visitors' understanding of generative AI. Features like real-time feedback, fun facts, and prompt explanations prompted users to shift from guessing to forming explanations based on visual reasoning. The minimalist layout was not cognitively overloading, enabling even non-technical users to engage with complex AI concepts.</p>
+    </div>
+    <div style="background:var(--cream); border:1px solid var(--border-light); border-radius:12px; padding:1.75rem;">
+      <h4 style="font-weight:700; margin-bottom:0.5rem; color:var(--rust);">RQ2: Mental Models</h4>
+      <p style="color:var(--slate); font-size:0.88rem;">Participants developed nuanced mental models: not just "AI = fake" but understanding how image generation works (prompts, dataset bias, visual artifacts). Users began spotting subtle clues like texture artifacts and unreal anatomy. One participant noted "this animal has five legs — AI gets the limbs wrong sometimes," showing emergent understanding of synthesis errors. Another said "knowing the prompt would help me reverse engineer the image," demonstrating meta-level reasoning.</p>
+    </div>
+  </div>
+
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- SKILLS -->
+<section id="skills" class="reveal">
+  <div class="sec-label">Skills &amp; Tools</div>
+  <div class="sec-title">Technical Competencies</div>
+  <div class="sec-sub">A cross-disciplinary toolkit spanning research methods, engineering, and design.</div>
+
+  <div class="skills-section">
+    <div class="skill-group">
+      <div class="skill-group-title">Research Methods</div>
+      <div class="tags">
+        <span class="tag">Mixed Methods</span>
+        <span class="tag">Systematic Lit. Review</span>
+        <span class="tag">Meta-Analysis</span>
+        <span class="tag">Thematic Analysis</span>
+        <span class="tag">Usability Testing</span>
+        <span class="tag">Heuristic Evaluation</span>
+        <span class="tag">Diary Studies</span>
+        <span class="tag">Contextual Inquiry</span>
+        <span class="tag">Think-Aloud</span>
+        <span class="tag">Empathy Mapping</span>
+        <span class="tag">User-Centered Design</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Programming</div>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">R</span>
+        <span class="tag">SQL</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">HTML/CSS</span>
+        <span class="tag">Golang</span>
+        <span class="tag">C#</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">AI / ML / NLP</div>
+      <div class="tags">
+        <span class="tag">LLMs</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Keras</span>
+        <span class="tag">Prompt Engineering</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Data &amp; Visualization</div>
+      <div class="tags">
+        <span class="tag">Tableau</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">Google Data Studio</span>
+        <span class="tag">MAXQDA</span>
+        <span class="tag">Excel</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Cloud &amp; DevOps</div>
+      <div class="tags">
+        <span class="tag">Azure</span>
+        <span class="tag">AWS</span>
+        <span class="tag">LaTeX</span>
+        <span class="tag">R Studio</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">GIS &amp; Spatial</div>
+      <div class="tags">
+        <span class="tag">ArcGIS</span>
+        <span class="tag">Remote Sensing</span>
+        <span class="tag">Web-GIS</span>
+        <span class="tag">Geospatial Analysis</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Process &amp; PM</div>
+      <div class="tags">
+        <span class="tag">Agile</span>
+        <span class="tag">Scrum</span>
+        <span class="tag">BPMN/Camunda</span>
+        <span class="tag">Mermaid Diagrams</span>
+        <span class="tag">SOPs</span>
+        <span class="tag">Jira</span>
+        <span class="tag">Trello</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">AI Tools</div>
+      <div class="tags">
+        <span class="tag">ChatGPT</span>
+        <span class="tag">Claude</span>
+        <span class="tag">Gemini</span>
+        <span class="tag">Copilot</span>
+        <span class="tag">Perplexity</span>
+        <span class="tag">Cursor</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Ethical AI</div>
+      <div class="tags">
+        <span class="tag">AI Explainability</span>
+        <span class="tag">Responsible AI Frameworks</span>
+        <span class="tag">Data Governance</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- AWARDS -->
+<section class="reveal">
+  <div class="sec-label">Awards &amp; Achievements</div>
+  <div class="sec-title">Recognition</div>
+  <div class="awards-list">
+    <div class="award-item">
+      <div class="award-icon">🏆</div>
+      <div>
+        <h4>World Innovation Day Hackathon — #4 of 1,000+ Teams</h4>
+        <p>HackMakers, Oracle, UNESCO, UNEP. Developed "EcoAction," an environmental knowledge-sharing and solutions portal. Over 4,000 participants globally.</p>
+        <div class="award-year">2020</div>
+        <a href="https://badges.parchment.au/public/assertions/CZAsZMgmSsmbVlHJ2GEddg?identity__email=brolyray.anshu%40gmail.com" target="_blank">View Badge →</a>
+      </div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">🏅</div>
+      <div>
+        <h4>Smart Cities Hackathon — Top 4 of 1,500 Teams</h4>
+        <p>HackMakers, Oracle, NSW Government, Slack. Built "Guardian," an IoT-powered safety app for women and accident victims.</p>
+        <div class="award-year">2020</div>
+        <a href="https://youtu.be/J2XcjlXAwf0" target="_blank">Watch Demo →</a>&nbsp;&nbsp;
+        <a href="https://badges.parchment.au/public/assertions/546IuuFsRyWkWrVWUjxo5A?identity__email=brolyray.anshu%40gmail.com" target="_blank">View Badge →</a>
+      </div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">🥈</div>
+      <div>
+        <h4>2nd Place — Capture the Flag (CTF) Competition</h4>
+        <p>OCRI Cybersecurity Symposium, 2023.</p>
+        <div class="award-year">2023</div>
+      </div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">⭐</div>
+      <div>
+        <h4>Employee of the Month</h4>
+        <p>Campus Recreation Center, University of Cincinnati.</p>
+        <div class="award-year">June 2023</div>
+      </div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon">🔐</div>
+      <div>
+        <h4>14th Place (In-Person) — BearcatCTF</h4>
+        <p>Cyber@UC, 2026.</p>
+        <div class="award-year">2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- CERTIFICATIONS -->
+<section class="reveal">
+  <div class="sec-label">Certifications</div>
+  <div class="sec-title">Credentials</div>
+  <div class="hobbies-row" style="margin-top: 1rem;">
+    <div class="hobby-chip"><span class="h-icon">📜</span> CITI Program (Research Ethics)</div>
+    <div class="hobby-chip"><span class="h-icon">🩺</span> Red Cross CPR/AED</div>
+    <div class="hobby-chip"><span class="h-icon">☕</span> Oracle Java (NIIT)</div>
+    <div class="hobby-chip"><span class="h-icon">🤖</span> Coursera Machine Learning</div>
+    <div class="hobby-chip"><span class="h-icon">📊</span> Google Data Foundations</div>
+    <div class="hobby-chip"><span class="h-icon">☁️</span> AWS Academy</div>
+    <div class="hobby-chip"><span class="h-icon">🧠</span> IIT TalentSprint AI &amp; Emerging Tech</div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- CONFERENCES -->
+<section class="reveal">
+  <div class="sec-label">Conferences &amp; Symposia</div>
+  <div class="sec-title">Events Attended</div>
+  <div class="hobbies-row" style="margin-top: 1rem;">
+    <div class="hobby-chip"><span class="h-icon">🎤</span> UC AI &amp; Emerging Technology Symposium</div>
+    <div class="hobby-chip"><span class="h-icon">🔐</span> BearcatCTF 2026</div>
+    <div class="hobby-chip"><span class="h-icon">🛡️</span> OCRI Cybersecurity Symposium (2022, 2023)</div>
+    <div class="hobby-chip"><span class="h-icon">🌍</span> Geospatial World Forum 2021</div>
+    <div class="hobby-chip"><span class="h-icon">🗺️</span> FOSS4G 2018</div>
+    <div class="hobby-chip"><span class="h-icon">💻</span> ACISAI 2018</div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- SERVICE & HOBBIES -->
+<section class="reveal">
+  <div class="sec-label">Service, Leadership &amp; Hobbies</div>
+  <div class="sec-title">Beyond the Lab</div>
+  <div class="sec-sub">Community involvement, creative pursuits, and interests outside research.</div>
+
+  <div style="margin-bottom: 2rem;">
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:1rem;">Leadership &amp; Volunteering</h3>
+    <div class="hobbies-row">
+      <div class="hobby-chip"><span class="h-icon">🌐</span> Model UN Delegate, JNTUH</div>
+      <div class="hobby-chip"><span class="h-icon">🤝</span> International Career Fair Volunteer, AIT</div>
+      <div class="hobby-chip"><span class="h-icon">🎪</span> Tech &amp; Cultural Event Organizer — Quest Festival (JNTUH &amp; AIT)</div>
+      <div class="hobby-chip"><span class="h-icon">🇮🇳</span> Media Volunteer, JASHN UC (ISA)</div>
+      <div class="hobby-chip"><span class="h-icon">📸</span> Photography &amp; Live Stream Coordinator, SU-AIT Media Club</div>
+    </div>
+  </div>
+
+  <div>
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.2rem; margin-bottom:1rem;">Hobbies &amp; Interests</h3>
+    <div class="hobbies-row">
+      <div class="hobby-chip"><span class="h-icon">📷</span> Photography</div>
+      <div class="hobby-chip"><span class="h-icon">🎮</span> Gaming</div>
+      <div class="hobby-chip"><span class="h-icon">🏏</span> Cricket</div>
+      <div class="hobby-chip"><span class="h-icon">🏸</span> Badminton</div>
+      <div class="hobby-chip"><span class="h-icon">⚽</span> Football</div>
+      <div class="hobby-chip"><span class="h-icon">♟️</span> Chess</div>
+      <div class="hobby-chip"><span class="h-icon">🎤</span> Singing</div>
+      <div class="hobby-chip"><span class="h-icon">💃</span> Dancing</div>
+      <div class="hobby-chip"><span class="h-icon">📜</span> History &amp; Mythologies</div>
+      <div class="hobby-chip"><span class="h-icon">🎬</span> Live Streaming &amp; Media</div>
+      <div class="hobby-chip"><span class="h-icon">🌱</span> Environmental Advocacy</div>
+      <div class="hobby-chip"><span class="h-icon">🔒</span> Cybersecurity / CTF</div>
+      <div class="hobby-chip"><span class="h-icon">✈️</span> Travel</div>
+      <div class="hobby-chip"><span class="h-icon">🎵</span> Music</div>
+      <div class="hobby-chip"><span class="h-icon">🧩</span> Hackathons</div>
+      <div class="hobby-chip"><span class="h-icon">🍳</span> Cooking</div>
+    </div>
+  </div>
+</section>
+
+<div class="sec-divider"></div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="foot-name">Anshuman Yashodhar Rangaraj</div>
+  <div class="foot-links">
+    <a href="/cdn-cgi/l/email-protection#d4b5baa7bca1b9b5baa6b5bab3b5a6b5be94b3b9b5bdb8fab7bbb9"><span class="__cf_email__" data-cfemail="6908071a011c0408071b08070e081b0803290e04080005470a0604">[email&#160;protected]</span></a>
+    <a href="tel:+15138794641">+1 (513) 879-4641</a>
+    <a href="https://www.linkedin.com/in/anshuman-yashodhar-rangaraj/" target="_blank">LinkedIn</a>
+    <a href="https://orcid.org/0009-0008-9526-4135" target="_blank">ORCID</a>
+  </div>
+  <div class="foot-copy">University of Cincinnati &middot; PhD Candidate &middot; Cincinnati, OH</div>
+</footer>
+
+<!-- Scroll reveal + Nav smooth scroll -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Scroll reveal
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+
+  // Nav scroll — pure JS scroll, no hash changes, no URL modification
+  function scrollToSection(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var rect = el.getBoundingClientRect();
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var top = rect.top + scrollTop - 75;
+    var start = scrollTop;
+    var distance = top - start;
+    var duration = 600;
+    var startTime = null;
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var ease = progress < 0.5
+        ? 2 * progress * progress
+        : -1 + (4 - 2 * progress) * progress;
+      window.scrollTo(0, start + distance * ease);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  // Attach via mousedown instead of click to beat iframe interception
+  document.querySelectorAll('.nav-link[data-target]').forEach(function(btn) {
+    btn.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      scrollToSection(this.getAttribute('data-target'));
+    });
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e
